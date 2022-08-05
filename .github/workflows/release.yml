@@ -1,0 +1,21 @@
+name: Release to GitHub Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release_to_ghr:
+    name: release to ghr
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: release go module
+        uses: go-semantic-release/action@v1
+        with:
+          github-token: ${{ secrets.RELEASE_TOKEN }}
